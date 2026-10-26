@@ -2,27 +2,12 @@ from datetime import datetime
 
 from pda_general import *
 
-####################emfanizei to menu tou estiatoriou me ta fagita/pota
-
-def checker_empty_tables():
-    if tables == [[[], [], []], [[], [], []], [[], [], []]]:
-        input("[ℹ️] Δεν υπάρχει ενεργή παραγγελία!\n[⬅️] Πάτησε 0 για επιστροφή στο μενού ")
-        return True
-
 def show_menu():
-    print("""
-    ╔══════════════════════════════════════════╗
-    ║                                          ║
-    ║            PDA ΕΣΤΙΑΤΟΡΙΟΥ               ║
-    ║           Κ Α Τ Α Λ Ο Γ Ο Σ              ║
-    ║                                          ║
-    """)
+    front_menu("║           Κ Α Τ Α Λ Ο Γ Ο Σ              ║")
     for i in range(len(items)):
         print("           ", items[i])
 
     input("\n[⬅️] Πάτησε 0 για επιστροφή στο μενού. ")
-
-####################elegxei an o aritmos einai apo x mexri y & kanei elegxw gia ta grammata
 
 def request_number(minimum,maximum,message):
     select = input(message)
@@ -32,16 +17,8 @@ def request_number(minimum,maximum,message):
 
     return int(select)
 
-###################elegxei ta diathesima trapezia me enan pseutiko arithmiti (numbers_tables), raw/col 3*3 pinaka
-
 def tables_show():
-    print("""
-    ╔══════════════════════════════════════╗
-    ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-    ║          ΔΙΑΘΕΣΙΜΑ ΤΡΑΠΕΖΙΑ          ║
-    ╠══════════════════════════════════════╣
-    ║                                      ║
-    """)
+    front_menu("║          ΔΙΑΘΕΣΙΜΑ ΤΡΑΠΕΖΙΑ              ║")
     numbers_tables = 1
     for i in range(len(tables)):
         for j in range(len(tables[i])):
@@ -49,10 +26,7 @@ def tables_show():
                 print("            Τραπέζι ", numbers_tables, ": ✅ Ελεύθερο")
             numbers_tables += 1
 
-    print("""
-    ║                                      ║                     
-    ╚══════════════════════════════════════╝
-    """)
+    back_menu_1()
 
 ###################paraggelia kai kleisimo trapeziou
 
@@ -87,13 +61,7 @@ def show_items_per_table():
     if checker_empty_tables() == True:
         return
 
-    print("""
-    ╔══════════════════════════════════════╗
-    ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-    ║          ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ         ║
-    ╠══════════════════════════════════════╣
-    ║                                      ║
-    """)
+    front_menu("║           ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ            ║")
     numbers_tables = 1
     for i in range(len(tables)):
         for j in range(len(tables[i])):
@@ -101,10 +69,7 @@ def show_items_per_table():
                 print("          Τραπέζι ", numbers_tables, ": 🍽️ Σε εξυπηρέτηση")
             numbers_tables += 1
 
-    print("""
-    ║                                      ║                     
-    ╚══════════════════════════════════════╝
-    """)
+    back_menu_1()
     while True:
         choose_table = request_number(1, 9, "[🔔] Επίλεξε ένα τραπέζι για να δεις την παραγγελία του. ")
 
@@ -116,37 +81,20 @@ def show_items_per_table():
         else:
             break
 
-    print("""
-    ╔══════════════════════════════════════╗
-    ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-    ║          ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ         ║
-    ╠══════════════════════════════════════╣
-    ║                                      ║
-    """)
+    front_menu("║           ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ            ║")
 
     for g in range(len(tables[i][j])):
         print("            ",tables[i][j][g])
 
-    print("""
-    ║                                      ║
-    ╠══════════════════════════════════════╣
-       🧾 ΣΥΝΟΛΟ:                 """, tables_money[i][j],"€")
+    back_menu_2(f"      🧾 ΣΥΝΟΛΟ:                 {tables_money[i][j]}€")
     input("\n[⬅️] Πάτησε 0 για επιστροφή στο μενού. ")
-
 
 def add_more_items_per_table(): #sorry gia to repeat
     if checker_empty_tables() == True:
         return
 
     while True:
-
-        print("""
-        ╔══════════════════════════════════════╗
-        ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-        ║          ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ         ║
-        ╠══════════════════════════════════════╣
-        ║                                      ║
-        """)
+        front_menu("║           ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ            ║")
         numbers_tables = 1
         for i in range(len(tables)):
             for j in range(len(tables[i])):
@@ -154,10 +102,7 @@ def add_more_items_per_table(): #sorry gia to repeat
                     print("              Τραπέζι ", numbers_tables, ": 🍽️ Σε εξυπηρέτηση")
                 numbers_tables += 1
 
-        print("""
-        ║                                      ║                     
-        ╚══════════════════════════════════════╝
-        """)
+        back_menu_1()
         while True:
             choose_table = request_number(1, 9, "[🔔] Επίλεξε ένα τραπέζι για την προσθήκη προϊόντος ")
 
@@ -192,14 +137,7 @@ def remove_more_items_per_table(): #sorry gia to repeat
         return
 
     while True:
-
-        print("""
-        ╔══════════════════════════════════════╗
-        ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-        ║          ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ         ║
-        ╠══════════════════════════════════════╣
-        ║                                      ║
-        """)
+        front_menu("║           ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ            ║")
         numbers_tables = 1
         for i in range(len(tables)):
             for j in range(len(tables[i])):
@@ -207,10 +145,7 @@ def remove_more_items_per_table(): #sorry gia to repeat
                     print("              Τραπέζι ", numbers_tables, ": 🍽️ Σε εξυπηρέτηση")
                 numbers_tables += 1
 
-        print("""
-        ║                                      ║                     
-        ╚══════════════════════════════════════╝
-        """)
+        back_menu_1()
         while True:
             choose_table = request_number(0, 9, "[🔔] Επίλεξε ένα τραπέζι για την αφαίρεση προϊόντος\n[⬅️] Πάτησε 0 για επιστροφή στο μενού ")
 
@@ -226,31 +161,18 @@ def remove_more_items_per_table(): #sorry gia to repeat
                 break
 
         num = 1
-        print("""
-        ╔══════════════════════════════════════╗
-        ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-        ║          ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ         ║
-        ╠══════════════════════════════════════╣
-        ║                                      ║
-        """)
-
+        front_menu("║           ΠΡΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ            ║")
         for g in range(len(tables[i][j])):
             print("                ", f"{num}.", tables[i][j][g])
             num += 1
 
-        print("""
-        ║                                      ║
-        ╠══════════════════════════════════════╣
-           🧾 ΣΥΝΟΛΟ:                 """, tables_money[i][j], "€")
+        back_menu_2(f"      🧾 ΣΥΝΟΛΟ:                 {tables_money[i][j]}€")
 
         while tables[i][j]:
             choose_item = request_number(0, len(tables[i][j]), f"[🔔] Επίλεξε το προϊόν που θέλεις να αφαιρέσεις. [1-{len(tables[i][j])}]\n[⬅️] Πάτησε 0 για επιστροφή στο μενού ")
 
             if choose_item == 0:
                 return
-
-            removed_item = tables[i][j].pop(choose_item - 1)
-            tables_money[i][j] -= price[items.index(removed_item)]
 
             print("[✅] Το προϊόν αφαιρέθηκε με επιτυχία!")
             print(tables)
@@ -265,13 +187,7 @@ def total_price():
         return
 
     while True:
-        print("""
-        ╔══════════════════════════════════════╗
-        ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-        ║        ΥΠΟΛΟΓΙΣΜΟΣ ΛΟΓΑΡΙΑΣΜΟΥ       ║
-        ╠══════════════════════════════════════╣
-        ║                                      ║
-        """)
+        front_menu("║        ΥΠΟΛΟΓΙΣΜΟΣ ΛΟΓΑΡΙΑΣΜΟΥ           ║")
         numbers_tables = 1
         for i in range(len(tables)):
             for j in range(len(tables[i])):
@@ -279,10 +195,7 @@ def total_price():
                     print("              Τραπέζι ", numbers_tables, ": 🍽️ Σε εξυπηρέτηση")
                 numbers_tables += 1
 
-        print("""
-        ║                                      ║                     
-        ╚══════════════════════════════════════╝
-        """)
+        back_menu_1()
         while True:
             choose_table = request_number(0, 9,
                                           "[🔔] Επίλεξε τραπέζι για τον υπολογισμό του λογαριασμού.\n[⬅️] Πάτησε 0 για επιστροφή στο μενού ")
@@ -306,13 +219,7 @@ def payment_method():
     print(payments_meth)
 
     while True:
-        print("""
-        ╔══════════════════════════════════════╗
-        ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-        ║        ΥΠΟΛΟΓΙΣΜΟΣ ΛΟΓΑΡΙΑΣΜΟΥ       ║
-        ╠══════════════════════════════════════╣
-        ║                                      ║
-        """)
+        front_menu("║        ΥΠΟΛΟΓΙΣΜΟΣ ΛΟΓΑΡΙΑΣΜΟΥ           ║")
         numbers_tables = 1
         for i in range(len(tables)):
             for j in range(len(tables[i])):
@@ -320,10 +227,7 @@ def payment_method():
                     print("              Τραπέζι ", numbers_tables, ": 🍽️ Σε εξυπηρέτηση")
                 numbers_tables += 1
 
-        print("""
-        ║                                      ║                     
-        ╚══════════════════════════════════════╝
-        """)
+        back_menu_1()
         while True:
             choose_table = request_number(0, 9,
                                           "[🔔] Επίλεξε τραπέζι για τον υπολογισμό του λογαριασμού.\n[⬅️] Πάτησε 0 για επιστροφή στο μενού ")
@@ -350,13 +254,7 @@ def show_full_info_about_table():
         return
 
     while True:
-        print("""
-        ╔══════════════════════════════════════╗
-        ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-        ║        ΥΠΟΛΟΓΙΣΜΟΣ ΛΟΓΑΡΙΑΣΜΟΥ       ║
-        ╠══════════════════════════════════════╣
-        ║                                      ║
-        """)
+        front_menu("║        ΥΠΟΛΟΓΙΣΜΟΣ ΛΟΓΑΡΙΑΣΜΟΥ           ║")
         numbers_tables = 1
         for i in range(len(tables)):
             for j in range(len(tables[i])):
@@ -364,10 +262,7 @@ def show_full_info_about_table():
                     print("              Τραπέζι ", numbers_tables, ": 🍽️ Σε εξυπηρέτηση")
                 numbers_tables += 1
 
-        print("""
-        ║                                      ║                     
-        ╚══════════════════════════════════════╝
-        """)
+        back_menu_1()
         while True:
             choose_table = request_number(0, 9,
                                           "[🔔] Επίλεξε τραπέζι για προβολή των πληροφοριών του.\n[⬅️] Πάτησε 0 για επιστροφή στο μενού ")
@@ -386,28 +281,22 @@ def show_full_info_about_table():
         ╔══════════════════════════════════════╗
         ║          ΠΛΗΡΟΦΟΡΙΕΣ ΤΡΑΠΕΖΙΟΥ       ║
         ╠══════════════════════════════════════╣
-        ║  🔢 Τραπέζι: {choose_table}          
-        ║  🍽️ Κατάσταση: Κατειλημμένο          
-        ║  🕒 Ώρα παραγγελίας: {time}          
-        ║  🧾 Προϊόντα: {len(tables[i][j])}    
-        ║  💰 Σύνολο: {tables_money[i][j]}€    
-        ║  💳 Πληρωμή: {payments_meth[i][j]}   
-        ║  ⏳ Εξόφληση: Εκκρεμεί               
-        ╚══════════════════════════════════════╝
+                  🔢 Τραπέζι: {choose_table}          
+                  🍽️ Κατάσταση: Κατειλημμένο          
+                  🕒 Ώρα παραγγελίας: {time}          
+                  🧾 Προϊόντα: {len(tables[i][j])}    
+                  💰 Σύνολο: {tables_money[i][j]}€    
+                  💳 Πληρωμή: {payments_meth[i][j]}   
+                  ⏳ Εξόφληση: Εκκρεμεί               
+        ╚═══════════════════════════════════════╝
                 """)
 
 def all_tables_showed():
     if checker_empty_tables() == True:
         return
 
+    front_menu("║            ΟΛΑ ΤΑ ΤΡΑΠΕΖΙΑ               ║")
 
-    print("""
-    ╔══════════════════════════════════════╗
-    ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-    ║           ΟΛΑ ΤΑ ΤΡΑΠΕΖΙΑ            ║
-    ╠══════════════════════════════════════╣
-    ║                                      ║
-    """)
     numbers_tables = 1
     for i in range(len(tables)):
         for j in range(len(tables[i])):
@@ -417,10 +306,7 @@ def all_tables_showed():
                 print("            Τραπέζι ", numbers_tables, ": 🔴 Κατειλημμένο")
             numbers_tables += 1
 
-    print("""
-    ║                                      ║                     
-    ╚══════════════════════════════════════╝
-    """)
+    back_menu_1()
 
     input("\n[⬅️] Πάτησε 0 για επιστροφή στο μενού. ")
 
@@ -430,13 +316,7 @@ def close_table():
 
     while True:
 
-        print("""
-        ╔══════════════════════════════════════╗
-        ║           PDA ΕΣΤΙΑΤΟΡΙΟΥ            ║
-        ║          ΚΛΕΙΣΙΜΟ ΤΡΑΠΕΖΙΟΥ          ║
-        ╠══════════════════════════════════════╣
-        ║                                      ║
-        """)
+        front_menu("║           ΚΛΕΙΣΙΜΟ ΤΡΑΠΕΖΙΟΥ             ║")
         numbers_tables = 1
         for i in range(len(tables)):
             for j in range(len(tables[i])):
@@ -444,10 +324,7 @@ def close_table():
                     print("              Τραπέζι ", numbers_tables, ": 🍽️ Σε εξυπηρέτηση")
                 numbers_tables += 1
 
-        print("""
-        ║                                      ║                     
-        ╚══════════════════════════════════════╝
-        """)
+        back_menu_1()
         while True:
             choose_table = request_number(0, 9, "[🔔] Επίλεξε τραπέζι για κλείσιμο.\n[⬅️] Πάτησε 0 για επιστροφή στο μενού ")
 
