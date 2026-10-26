@@ -28,8 +28,6 @@ def tables_show():
 
     back_menu_1()
 
-###################paraggelia kai kleisimo trapeziou
-
 def new_table_reserve():
     tables_show()
     while True:
@@ -50,7 +48,7 @@ def new_table_reserve():
         if choose_item == 0:
             break
         else:
-            quantity = int(input("[🔔] Πόσα τεμάχια θέλεις να προσθέσεις; "))
+            quantity = request_number(1,100, "[🔔] Πόσα τεμάχια θέλεις να προσθέσεις; [1-100]")
             for q in range(quantity):
                 tables[i][j].append(items[choose_item - 1])
                 total += price[choose_item - 1]
@@ -89,7 +87,7 @@ def show_items_per_table():
     back_menu_2(f"      🧾 ΣΥΝΟΛΟ:                 {tables_money[i][j]}€")
     input("\n[⬅️] Πάτησε 0 για επιστροφή στο μενού. ")
 
-def add_more_items_per_table(): #sorry gia to repeat
+def add_more_items_per_table():
     if checker_empty_tables() == True:
         return
 
@@ -121,7 +119,7 @@ def add_more_items_per_table(): #sorry gia to repeat
         if choose_item == 0:
             break
         else:
-            quantity = int(input("[🔔] Πόσα τεμάχια θέλεις να προσθέσεις; "))
+            quantity = request_number(1,100, "[🔔] Πόσα τεμάχια θέλεις να προσθέσεις; [1-100]")
             for q in range(quantity):
                 tables[i][j].append(items[choose_item - 1])
                 plus_total += price[choose_item - 1]
@@ -132,7 +130,7 @@ def add_more_items_per_table(): #sorry gia to repeat
         break
 
 
-def remove_more_items_per_table(): #sorry gia to repeat
+def remove_more_items_per_table():
     if checker_empty_tables() == True:
         return
 
@@ -173,6 +171,9 @@ def remove_more_items_per_table(): #sorry gia to repeat
 
             if choose_item == 0:
                 return
+
+            removed_item = tables[i][j].pop(choose_item - 1)
+            tables_money[i][j] -= price[items.index(removed_item)]
 
             print("[✅] Το προϊόν αφαιρέθηκε με επιτυχία!")
             print(tables)
@@ -244,10 +245,10 @@ def payment_method():
                 choose_method = request_number(1, 2,"[💳] Επίλεξε τρόπο πληρωμής: \n1. 💳 Κάρτα \n2. 💵 Μετρητά ")
                 if choose_method == 1:
                     print("[✅] Επιλέχθηκε πληρωμή με κάρτα.")
-                    payments_meth[i][j][0] = "Κάρτα"
+                    payments_meth[i][j] = "Κάρτα"
                 else:
                     print("[✅] Επιλέχθηκε πληρωμή με μετρητά.")
-                    payments_meth[i][j][0] = "Μετρητά"
+                    payments_meth[i][j] = "Μετρητά"
 
 def show_full_info_about_table():
     if checker_empty_tables() == True:
